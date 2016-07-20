@@ -15,11 +15,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textField2: UITextField!
     @IBOutlet weak var textField3: UITextField!
     @IBOutlet weak var characterCountLabel: UILabel!
+    @IBOutlet weak var slidey: UISwitch!
     
     // Text Field Delegate objects
     let zipCodeField = ZipCodeField()
     let cashTextField = CashtextField()
-    let lockableTextField = LockableTextField()
+ // let lockableTextField = ViewController()
     
     // Life Cycle Methods
     
@@ -33,7 +34,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.textField1.delegate = zipCodeField
         self.textField2.delegate = cashTextField
         self.textField3.delegate = self
+        self.slidey.setOn(false, animated: false)
     }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        return self.slidey.on
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true;
+    }
+    
+    // the function in the textbox with the switch
+    
+    @IBAction func toggleTheTextEditor(sender: AnyObject) {
+        
+        if !(sender as! UISwitch).on {
+            self.textField3.resignFirstResponder()
+        }
+    }
+
 
     
     // Text Field Delegate Methods
